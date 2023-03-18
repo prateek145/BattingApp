@@ -4,149 +4,38 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="dashboard.html">
+                <a class="nav-link " href="{{route('dashboard')}}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li><!-- End Dashboard Nav -->
-
+            @inject('ApiTraits', 'App\Http\Controllers\backend\BackendController')
+            @php
+                $data = $ApiTraits->typeofevent();
+            @endphp
+            @for ($i = 0; $i < count($data); $i++)
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>CRICKET</span><i class="bi bi-chevron-down ms-auto"></i>
+                <a class="nav-link collapsed" data-bs-target="#components-nav{{$i}}" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>{{$data[$i]['name']}}</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="components-nav{{$i}}" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    @php
+                        $matches = $ApiTraits->specificevent($data[$i]['eventType']);
+                        // print_r($matches);
+                    @endphp
+                    @for ($j = 0; $j < count($matches); $j++)
                     <li>
                         <a href="components-alerts.html">
-                            <i class="bi bi-circle"></i><span>Pakistan Super League</span>
+                            <i class="bi bi-circle"></i><span>{{$matches[$j]->competition->name}}</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="components-accordion.html">
-                            <i class="bi bi-circle"></i><span>ICC Womens World Twenty20 </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-badges.html">
-                            <i class="bi bi-circle"></i><span>Test Matches</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-breadcrumbs.html">
-                            <i class="bi bi-circle"></i><span>ICC World Cup League Matches</span>
-                        </a>
-                    </li>
-
+                        
+                    @endfor
                 </ul>
+
             </li><!-- End Components Nav -->
+            @endfor
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>TENNIS</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="forms-elements.html">
-                            <i class="bi bi-circle"></i><span>WTA Mérida 2023</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="forms-layouts.html">
-                            <i class="bi bi-circle"></i><span>Monterrey Challenger 2023</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="forms-editors.html">
-                            <i class="bi bi-circle"></i><span>Bengaluru Challenger 2023</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="forms-validation.html">
-                            <i class="bi bi-circle"></i><span>WTA Dubai 2023</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="forms-validation.html">
-                            <i class="bi bi-circle"></i><span>ATP Marseille 2023</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="forms-validation.html">
-                            <i class="bi bi-circle"></i><span>ATP Doha 2023</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Forms Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>SOCCER</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="tables-general.html">
-                            <i class="bi bi-circle"></i><span>Mexican Liga MX</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tables-data.html">
-                            <i class="bi bi-circle"></i><span>Indonesian Liga 1</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tables-data.html">
-                            <i class="bi bi-circle"></i><span>Australian A-League</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Tables Nav -->
-
-            <!--<li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="charts-chartjs.html">
-              <i class="bi bi-circle"></i><span>Chart.js</span>
-            </a>
-          </li>
-          <li>
-            <a href="charts-apexcharts.html">
-              <i class="bi bi-circle"></i><span>ApexCharts</span>
-            </a>
-          </li>
-          <li>
-            <a href="charts-echarts.html">
-              <i class="bi bi-circle"></i><span>ECharts</span>
-            </a>
-          </li>
-        </ul>
-      </li>-->
-            <!-- End Charts Nav -->
-
-            <!--<li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="icons-bootstrap.html">
-              <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
-            </a>
-          </li>
-          <li>
-            <a href="icons-remix.html">
-              <i class="bi bi-circle"></i><span>Remix Icons</span>
-            </a>
-          </li>
-          <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Boxicons</span>
-            </a>
-          </li>
-        </ul>
-      </li>-->
             <!-- End Icons Nav -->
 
             <li class="nav-heading">IN PLAY</li>
@@ -201,5 +90,63 @@
             </li><!-- End Blank Page Nav -->
 
         </ul>
+        
+        
+        
+        
+        
+        
+        
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#components-navx" data-bs-toggle="collapse" href="#" aria-expanded="false">
+                    <i class="bi bi-menu-button-wide"></i><span>New Soccer</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="components-navx" class="nav-content collapse " data-bs-parent="#sidebar-nava">
+                    <li>
+                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="bi bi-circle"></i><span>ABC</span>
+                        </a>
+                        <ul>
+                            <li>
+                        
+                                <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="bi bi-circle"></i><span>KLF</span>
+                        </a>
+                        <ul>
+                            <li>
+                        
+                                <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 3 </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 4 </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+
+            </li>
+
+        
+
+        </ul>
+        
 
     </aside><!-- End Sidebar-->
